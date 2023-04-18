@@ -19,7 +19,15 @@ def combinar_basico(nombres: List[str], precios: List[float]) -> Tuple[Any]:
 
     Restricción: Resolver utilizando un bucle for.
     """
-    pass # Completar
+
+    lista1 = []
+    lista2 = []
+    for i in range(len(nombres)):
+        lista1.append((nombres[i], precios[i]))
+    lista2 = tuple(lista1)
+    return lista2
+
+    pass  # Completar
 
 
 # NO MODIFICAR - INICIO
@@ -43,7 +51,15 @@ def combinar_enumerate(nombres: List[str], precios: List[float], ids: List[int])
     """Re-Escribir utilizando enumerate y agregando un nuevo componente.
     Referencia: https://docs.python.org/3/library/functions.html#enumerate
     """
-    pass # Completar
+
+    lista1 = []
+    lista2 = []
+    for i, j in enumerate(nombres):
+        lista1.append((j, precios[i], ids[i]))
+    lista2 = tuple(lista1)
+    return lista2
+
+    pass  # Completar
 
 
 # NO MODIFICAR - INICIO
@@ -53,7 +69,8 @@ respuesta = (
     ("shampoo", 5.2, 3578),
 )
 
-assert combinar_enumerate(nombre_articulos, precio_articulos, id_articulos) == respuesta
+assert combinar_enumerate(
+    nombre_articulos, precio_articulos, id_articulos) == respuesta
 # NO MODIFICAR - FIN
 
 
@@ -67,7 +84,15 @@ def combinar_zip(nombres: List[str], precios: List[float], ids: List[int]) -> Tu
     """Re-Escribir utilizando zip.
     Referencia: https://docs.python.org/3/library/functions.html#zip
     """
-    pass # Completar
+
+    lista1 = []
+    lista2 = []
+    for i, j, k in zip(nombres, precios, ids):
+        lista1.append((i, j, k))
+    lista2 = tuple(lista1)
+    return lista2
+
+    pass  # Completar
 
 
 # NO MODIFICAR - INICIO
@@ -77,7 +102,8 @@ respuesta = (
     ("shampoo", 5.2, 3578),
 )
 
-assert combinar_zip(nombre_articulos, precio_articulos, id_articulos) == respuesta
+assert combinar_zip(nombre_articulos, precio_articulos,
+                    id_articulos) == respuesta
 # NO MODIFICAR - FIN
 
 
@@ -93,7 +119,15 @@ def combinar_zip_args(*args) -> Tuple[Any]:
     """Re-Escribir utilizando zip y una cantidad arbitraria de componentes.
     Referencia: https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists
     """
-    pass # Completar
+
+    lista1 = []
+    lista2 = []
+    for i in zip(*args):
+        lista1.append(i)
+    lista2 = tuple(lista1)
+    return lista2
+
+    pass  # Completar
 
 
 # NO MODIFICAR - INICIO
