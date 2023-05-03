@@ -6,17 +6,23 @@ from typing import List
 
 # NO MODIFICAR - INICIO
 class Article:
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+# NO MODIFICAR - FIN
     """Agregar los métodos que sean necesarios para que los test funcionen.
     Hint: los métodos necesarios son todos magic methods
     Referencia: https://docs.python.org/3/reference/datamodel.html#basic-customization
     """
 
-    def __init__(self, name: str) -> None:
-        self.name = name
-
-    # NO MODIFICAR - FIN
-
-    # Completar
+    def __str__(self) -> str:
+        return self.name
+    
+    def __repr__(self) -> str:
+        return f"Article({self.name})"
+    
+    def __eq__(self, other: Article) -> bool:
+        return self.name == other.name
 
 
 # NO MODIFICAR - INICIO
@@ -46,10 +52,25 @@ class ShoppingCart:
         self.articles = new_articles
 
         return self
+# NO MODIFICAR - FIN
 
-    # NO MODIFICAR - FIN
-
-    # Completar
+    def __str__(self) -> str:
+        return str([article.name for article in self.articles])
+    
+    def __repr__(self) -> str:
+        return f"ShoppingCart({self.articles})"
+    
+    def __eq__(self, other: ShoppingCart) -> bool:
+        return self.articles == other.articles
+    
+    def __add__(self, other: ShoppingCart) -> ShoppingCart:
+        return ShoppingCart(self.articles + other.articles)
+    
+    def __hash__(self) -> int:
+        return hash(self.articles)
+    
+    def __remove__(self, other: ShoppingCart) -> ShoppingCart:
+        return ShoppingCart(self.articles - other.articles)
 
 
 # NO MODIFICAR - INICIO

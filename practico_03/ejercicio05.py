@@ -10,9 +10,22 @@ class Auto:
     Restricción: Usar Properties
     
     Referencia: https://docs.python.org/3/library/functions.html#property"""
+    
+    def __init__(self, nombre: str, precio: float):
+        self._nombre = nombre
+        self._precio = precio
 
-    # Completar
+    @property
+    def nombre(self):
+        return self._nombre.title()
 
+    @property
+    def precio(self):
+        return self._precio
+
+    @precio.setter
+    def precio(self, value):
+        self._precio = value
 
 # NO MODIFICAR - INICIO
 auto = Auto("Ford", 12_875.456)
@@ -38,8 +51,20 @@ from dataclasses import dataclass
 @dataclass
 class Auto:
     """Re-Escribir utilizando DataClasses"""
+    _nombre: str
+    _precio: float
 
-    # Completar
+    @property
+    def nombre(self):
+        return self._nombre.title()
+
+    @property
+    def precio(self):
+        return self._precio
+
+    @precio.setter
+    def precio(self, value):
+        self._precio = value
 
 
 # NO MODIFICAR - INICIO
