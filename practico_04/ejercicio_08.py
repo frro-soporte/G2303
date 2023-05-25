@@ -1,10 +1,11 @@
 """Base de datos SQL - Listar"""
 
 import datetime
-
-from practico_04.ejercicio_02 import agregar_persona
-from practico_04.ejercicio_06 import reset_tabla
-from practico_04.ejercicio_07 import agregar_peso
+from ejercicio_01 import c, con
+from ejercicio_02 import agregar_persona
+from ejercicio_06 import reset_tabla
+from ejercicio_04 import buscar_persona
+from ejercicio_07 import agregar_peso
 
 
 def listar_pesos(id_persona):
@@ -30,8 +31,20 @@ def listar_pesos(id_persona):
 
     - False en caso de no cumplir con alguna validacion.
     """
-    return []
-
+    p = buscar_persona(id_persona)
+    if(not p):
+        print("No existe la persona")
+        return False
+    else:
+        c.execute("SELECT fecha, peso FROM personaPeso WHERE idPersona = ?", (id_persona,))
+        p = c.fetchall()
+        # take the first 10 caracteres from the fecha string
+        p = [(fecha[:10], peso) for fecha, peso in p]
+        print('Pesos :: ', p)
+        if p is not None:
+            return p
+        else:
+            return False
 
 # NO MODIFICAR - INICIO
 @reset_tabla

@@ -2,15 +2,25 @@
 
 import datetime
 
-from practico_04.ejercicio_01 import reset_tabla
-from practico_04.ejercicio_02 import agregar_persona
-
+from ejercicio_01 import reset_tabla ,c , sqlite3,con 
+from ejercicio_02 import agregar_persona
 
 def borrar_persona(id_persona):
     """Implementar la funcion borrar_persona, que elimina un registro en la 
     tabla Persona. Devuelve un booleano en base a si encontro el registro y lo 
     borro o no."""
-    pass # Completar
+    try : 
+        c.execute("SELECT * FROM persona WHERE id = ?", (id_persona,))
+        p = c.fetchone()
+        if p is None:
+            return False
+        else:
+            c.execute("DELETE FROM persona WHERE id = ?", (id_persona,))
+            con.commit()               
+            return True
+    except sqlite3.Error as e:
+        print("Error al conectar con la base de datos", e)
+        return False
 
 # NO MODIFICAR - INICIO
 @reset_tabla

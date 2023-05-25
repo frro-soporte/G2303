@@ -1,9 +1,10 @@
 """Base de Datos SQL - Uso de múltiples tablas"""
 
 import datetime
-
-from practico_04.ejercicio_02 import agregar_persona
-from practico_04.ejercicio_06 import reset_tabla
+from ejercicio_01 import c, con
+from ejercicio_02 import agregar_persona
+from ejercicio_06 import reset_tabla
+from ejercicio_04 import buscar_persona
 
 
 def agregar_peso(id_persona, fecha, peso):
@@ -19,8 +20,20 @@ def agregar_peso(id_persona, fecha, peso):
     Debe devolver:
     - ID del peso registrado.
     - False en caso de no cumplir con alguna validacion."""
+    p = buscar_persona(id_persona)
+    if(not p):
+        print("No existe la persona")
+        return False
+    else:
+        c.execute("SELECT * FROM personaPeso WHERE idPersona = ? AND fecha > ?", (id_persona, fecha))
+        p = c.fetchone()
+        if p is None:
+            c.execute("INSERT INTO personaPeso (idPersona, fecha, peso) VALUES (?, ?, ?)", (id_persona, fecha, peso))
+            con.commit()
+            return c.lastrowid
+        else:
+            return False
 
-    pass # Completar
 
 
 # NO MODIFICAR - INICIO
