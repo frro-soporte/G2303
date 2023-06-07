@@ -1,9 +1,12 @@
 # Implementar los casos de prueba descriptos.
 
 import unittest
+import sys
 
-from practico_05.ejercicio_01 import Socio
-from practico_06.capa_negocio import NegocioSocio, LongitudInvalida
+sys.path.append("E:\OneDrive - frro.utn.edu.ar\Facultad 5\Soporte\Practica-Soporte\practico_05")
+
+from ejercicio_01 import Socio
+from capa_negocio import NegocioSocio, LongitudInvalida
 
 
 class TestsNegocio(unittest.TestCase):

@@ -1,7 +1,11 @@
 # Implementar los metodos de la capa de negocio de socios.
 
-from practico_05.ejercicio_01 import Socio
-from practico_05.ejercicio_02 import DatosSocio
+import sys
+
+sys.path.append("E:\OneDrive - frro.utn.edu.ar\Facultad 5\Soporte\Practica-Soporte\practico_05")
+
+from ejercicio_01 import Socio
+from ejercicio_02 import DatosSocio
 
 
 class DniRepetido(Exception):
@@ -31,7 +35,12 @@ class NegocioSocio(object):
         Devuelve None si no encuentra nada.
         :rtype: Socio
         """
-        return
+        socio = self.datos.buscar(id_socio);
+        if socio is not None:
+            print('El socio encontrado es: ', socio.nombre , ' ', socio.apellido)
+            return socio
+        else:
+            return None            
 
     def buscar_dni(self, dni_socio):
         """
@@ -39,14 +48,27 @@ class NegocioSocio(object):
         Devuelve None si no encuentra nada.
         :rtype: Socio
         """
-        return
+        socio = self.datos.buscar_dni(dni_socio);
+        if socio is not None:
+            print('El socio encontrado es: ', socio.nombre , ' ', socio.apellido)
+            return socio
+        else:
+            return None
 
     def todos(self):
         """
         Devuelve listado de todos los socios.
         :rtype: list
         """
-        return []
+        socios = self.datos.todos()
+        if socios is not None:
+            print('Los socios encontrados son: ')
+            for socio in socios:
+                print(socio.nombre , ' ', socio.apellido)
+            return socios
+        else:
+            print('No se encontraron socios')
+            return None
 
     def alta(self, socio):
         """
@@ -57,7 +79,17 @@ class NegocioSocio(object):
         :type socio: Socio
         :rtype: bool
         """
-        return False
+        if self.regla_1(socio) and self.regla_2(socio) and self.regla_3():
+            socioCreado = self.datos.alta(socio)
+            if socioCreado is not None:
+                print('El socio creado es: ', socio.nombre , ' ', socio.apellido)
+                return True
+            else:
+                print ('No se pudo crear el socio')
+                return False
+        else:
+            print ('No se cumplieron las reglas de negocio')
+            return False
 
     def baja(self, id_socio):
         """
@@ -65,7 +97,12 @@ class NegocioSocio(object):
         Devuelve True si el borrado fue exitoso.
         :rtype: bool
         """
-        return False
+        if self.datos.baja(id_socio):
+            print('El socio fue borrado')
+            return True
+        else:
+            print('El socio no fue borrado')
+            return False
 
     def modificacion(self, socio):
         """
@@ -76,7 +113,15 @@ class NegocioSocio(object):
         :type socio: Socio
         :rtype: bool
         """
-        return False
+        if self.regla_2(socio):
+            socioModificado = self.datos.modificacion(socio)
+            if socioModificado is not None:
+                print('El socio modificado es: ', socio.nombre , ' ', socio.apellido)
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def regla_1(self, socio):
         """
@@ -85,7 +130,10 @@ class NegocioSocio(object):
         :raise: DniRepetido
         :return: bool
         """
-        return False
+        if self.datos.buscar_dni(socio.dni) is None:
+            return True
+        else:
+            raise Exception("No se puede dar de alta al socio: no cumple con la regla 1 (DNI repetido))")
 
     def regla_2(self, socio):
         """
@@ -94,7 +142,13 @@ class NegocioSocio(object):
         :raise: LongitudInvalida
         :return: bool
         """
-        return False
+        if len(socio.nombre) > self.MIN_CARACTERES and len(socio.nombre) < self.MAX_CARACTERES:
+            if len(socio.apellido) > self.MIN_CARACTERES and len(socio.apellido) < self.MAX_CARACTERES:
+                return True
+            else:
+                raise Exception("No se puede dar de alta al socio: no cumple con la regla 2 (Longitud del apellido invalida)")
+        else:
+            raise Exception("No se puede dar de alta al socio: no cumple con la regla 2 (Longitud del nombre invalida)")
 
     def regla_3(self):
         """
@@ -102,4 +156,7 @@ class NegocioSocio(object):
         :raise: MaximoAlcanzado
         :return: bool
         """
-        return False
+        if len(self.datos.todos()) < self.MAX_SOCIOS:
+            return True
+        else:
+            raise Exception("No se puede dar de alta al socio: no cumple con la regla 3 (Maximo de socios alcanzado)")
