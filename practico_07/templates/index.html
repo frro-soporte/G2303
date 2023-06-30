@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Socios</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./../style.css">
+</head>
+
+<body class="bg-gray-200 flex min-h-screen flex-col ">
+{% include 'layout/header.html' %}
+
+<section class="flex flex-col gap-4  container m-auto">
+    <h1 class=" flex items-center gap-4 border-b border-blue-300 pb-2">
+        <span class="font-extrabold uppercase text-transparent text-3xl bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600">
+            Socios ABM 
+
+        </span>
+        <a href="/socios/create" class="rounded-full shadow flex items-center text-lg font-bold justify-center text-white bg-blue-500 p-3 w-8 h-8 " title="agregar socio">+</a>
+    </h1>
+    <section class="todos flex items-start gap-4 my-6">
+        {% for socio in socios %}
+        {% include 'socios/socio.html' %}
+        {% endfor %}
+    </section>
+</section>
+
+{% include 'layout/footer.html' %}
+
+
+
+</body>
+
+</html>

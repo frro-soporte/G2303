@@ -3,7 +3,7 @@
 import unittest
 import sys
 
-sys.path.append("E:\OneDrive - frro.utn.edu.ar\Facultad 5\Soporte\Practica-Soporte\practico_05")
+sys.path.append("C:\Users\jhmes\Documents\UTN_5_YEAR\Soporte\G2303\practico_05")
 
 from ejercicio_01 import Socio
 from capa_negocio import NegocioSocio, LongitudInvalida

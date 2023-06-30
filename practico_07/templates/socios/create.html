@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Socios</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./../../style.css">
+    <style>
+        body {
+    background-color: #ebebeb;
+}
+fieldset{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0 !important;
+}
+
+input {
+    outline: none;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    padding: 7px 8px !important;
+
+}
+    </style>
+</head>
+
+<body class="bg-gray-200 flex min-h-screen flex-col ">
+
+{% include 'layout/header.html' %}
+
+<section class="flex flex-col gap-4  container m-auto">
+   
+    <section class="todos flex items-center gap-4 w-full grid place-items-center">
+        <div class="error">
+            {% if error %}
+                <p class="text-red-500">{{error}}</p>
+            {% endif %}
+        </div>
+        <h1 class="font-extrabold capitalize text-transparent text-3xl bg-clip-text bg-gradient-to-r from-blue-400 to-pink-600">
+            Agregar Socio
+        </h1>
+        <form action="/socio/save" method="post" class="shadow p-4 w-[350px] bg-white rounded-md">
+            <fieldset>
+                <label for="dni">DNI</label>
+                <input type="text" name="dni" id="dni"  required>
+            </fieldset>
+
+            <fieldset>
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" id="apellido" required>
+            </fieldset>
+
+            <fieldset>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" required>
+            </fieldset>
+
+            <fieldset>
+                <input type="submit" value="Agregar" class="capitalize text-lg bg-gray-200 hover:bg-gray-300 duration-900 font-bold">
+            </fieldset>
+
+       </form>
+    </section>
+</section>
+
+
+{% include 'layout/footer.html' %}
+
+
+
+
+</body>
+
+</html>

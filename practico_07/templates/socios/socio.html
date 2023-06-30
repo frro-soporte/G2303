@@ -1,0 +1,12 @@
+<div
+    class="todo-item w-[200px] p-2 hover:shadow bg-white hover:rounded-md duration-900 transition-500 cursor-pointer group">
+    <p class="todo-item__text text-lg font-bold ">{{ socio['apellido'] }} {{ socio['nombre'] }}</p>
+    <div class="socio-item__details my-1">
+        <span class="text-xs text-gray-400">{{socio['dni']}}</span>
+    </div>   
+    <!-- group-hover:flex hidden  -->
+    <div class="actions flex gap-4 my-2">
+        <a href="/socios/{{socio['id']}}/edit" class="text-xs text-yellow-600 border border-gray-200 rounded-fullc shadow px-3 py-1 hover:bg-gray-300">Editar</a>
+        <a href="/socios/{{socio['id']}}/delete" class="text-xs text-red-600 border border-gray-200 rounded-fullc shadow px-3 py-1 hover:bg-red-500 hover:text-white">Borrar</a>
+    </div>
+</div>
