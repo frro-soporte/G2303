@@ -1,0 +1,495 @@
+MainWindowManager:
+# add a white backgroud color 
+    # canvas.before:
+    #     Color:
+    #         rgba:(7, 56, 72, 0.8)
+    #     Rectangle:
+    #         pos: self.pos
+    #         size: self.size
+    UserList:
+    AddUser:
+    EditUser:
+
+<UserList>:
+    name: "userlist"
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba:(7/255, 12/255, 32/255, 0.95)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            orientation: "horizontal"
+            size_hint: 1, None
+            # put it at the top of the screen
+            pos_hint: {'center_x': .5, 'center_y': .1}    
+            height: 70            
+            Label:
+                text: "Lista de Personas"
+        ScrollView:
+            # canvas.before:
+            #     Color:
+            #         rgba:(1, 0, 0, 1)
+            #     Rectangle:
+            #         pos: self.pos
+            #         size: self.size
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: 1, None
+                height: self.minimum_height 
+                GridLayout:
+                    cols : 2
+                    spacing: 1
+                    padding: 20
+                    size_hint: 1, None
+                    height: 100
+                    Label:
+                        id:lblName
+                        text: "DNI/Nombre/Apellido"
+                        color: (1,1,1,1)
+                        size_hint: 1, None
+                        # size : 400, 50
+                        height: 60
+                        canvas.before:
+                            Color:
+                                rgba:(2/255, 31/255, 53/255, 0.8)
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size                        
+                    Label:
+                        id:lblAction
+                        text: "Acciones"
+                        color: (1,1,1,1)
+                        size_hint: 1, None
+                        # size : 400, 50
+                        height: 60
+                        canvas.before:
+                            Color:
+                                rgba:(2/255, 31/255, 53/255, 0.8)
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size    
+                UsersList:        
+                    size_hint: 1, None
+                    height: self.minimum_height   
+                # Label :
+                #     text: root.error
+                #     text_size: self.size
+                #     halign: 'left'
+                #     valign: 'middle'                                     
+                #     size_hint: 1, None                    
+                #     # size : 400, 70  
+                #     height: 70               
+                #     # generate a red color
+                #     color: (250/255, 73/255, 73/255, 1)
+                #     # if the error is empty, hide the label
+                #     size_hint_y: None
+                #     height: self.texture_size[1] if self.text else 0
+                
+                # Label :
+                #     text: root.success
+                #     text_size: self.size
+                #     halign: 'left'
+                #     valign: 'middle'                                     
+                #     size_hint: None, None                    
+                #     size : 400, 70                
+                #     # green color for this text
+                #     color: (6/255, 115/255, 0, 1)
+                #     size_hint_y: None
+                #     height: self.texture_size[1] if self.text else 0                
+        Button:
+            text: "Refrescar"
+            spacing: 20
+            padding: 20
+            bold : True
+            font_size : 25
+            size : 400, 50
+            size_hint: None, None
+            background_color:(250/255, 195/255, 0, 1)
+            on_release: root.manager.current = 'userlist'
+          
+# navbar
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, None
+            spacing : 20
+            # padding : 10
+            height: 70
+            canvas.before:
+                Color:
+                    rgba:(7/255, 12/255, 32/255, 0.95)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:                
+                text: "Ver Lista"    
+                on_release: app.root.current = "userlist"
+                outline_width: 0.1
+                outline_color: 0, 0, 0, 1
+                color: (252/255, 198/255, 7/255, 1)
+                background_color:(27/255, 43/255, 106/255, 0.95)
+                bold : True
+                font_size: 23
+            
+            Button:
+                outline_width: 0.1
+                outline_color: 0, 0, 0, 1
+                text: "Agregar Persona"
+                font_size: 23
+                color: (223/255, 223/255, 223/255, 1)
+                bold : True
+                on_release: app.root.current = "adduser"
+                background_color:(38/255, 9/255, 28/255, 0)
+
+<AddUser>:
+    name: "adduser"
+    BoxLayout:
+        orientation: "vertical"
+# topbar
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba:(7/255, 12/255, 32/255, 0.95)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            orientation: "horizontal"
+            size_hint: 1, None
+            # put it at the top of the screen
+            pos_hint: {'center_x': .5, 'center_y': .1}    
+            height: 70            
+            Label:
+                text: "Agregar persona"
+# content add user    
+        GridLayout:
+            cols: 1
+            # canvas.before:
+            #     Color:
+            #         rgba:(1, 0, 0, 1)
+            #     Rectangle:
+            #         pos: self.pos
+            #         size: self.size
+            # orientation: "vertical"               
+            padding: 20
+            spacing: 20
+            size_hint: None,1
+            # height: 650
+            width: 500
+            pos_hint: {'center_x':0.5, 'center_y': 0.5}    
+            # pos_hint_y : 0.5
+            # pos_hint_x : 0.5           
+                                          
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: 1, None                    
+                height: 100       
+                pos_hint: {'center_x':0.5, 'center_y': 0.5}    
+                # size : 400, 100    
+                # size_hint: 1, 1
+                # canvas.before:
+                #     Color:
+                #         rgba:(1, 0, 0, 0.95)
+                #     Rectangle:
+                #         pos: self.pos
+                #         size: self.size  
+                Label:
+                    text: "DNI"
+                    color: (7/255, 12/255, 32/255, 0.95)
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'                                     
+                    size_hint: None, None                    
+                    size : 400, 30    
+                    spacing: 10                 
+                TextInput:
+                    id: dni
+                    size_hint: 1, None 
+                    height: 50
+                    multiline: False
+                    # size : 400, 50
+
+            BoxLayout:
+                orientation: "vertical" 
+                size_hint: 1, None                    
+                # size : 400, 100    
+                height: 100      
+                pos_hint: {'center_x':0.5, 'center_y': 0.5}    
+
+                Label:
+                    text: "Nombre"
+                    color: (7/255, 12/255, 32/255, 0.95)
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'                                     
+                    size_hint: None, None                    
+                    size : 400, 30                     
+                TextInput:
+                    id: nombre
+                    size_hint: 1, None 
+                    height: 50
+                    multiline: False
+            BoxLayout:
+                size_hint: 1, None                    
+                # size : 400, 100    
+                height: 100
+                # padding: 10
+                # spacing: 10
+                # spacing: 100            
+                orientation: "vertical"            
+                Label:
+                    text: "Apellido"
+                    color: (7/255, 12/255, 32/255, 0.95)
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'                                     
+                    size_hint: None, None                    
+                    size : 400, 30                     
+                TextInput:
+                    id: apellido
+                    size_hint: 1, None 
+                    height: 50
+                    multiline: False
+            Label :
+                text: root.error
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'                                     
+                size_hint: 1, None                    
+                # size : 400, 70  
+                height: 70               
+                # generate a red color
+                color: (250/255, 73/255, 73/255, 1)
+                # if the error is empty, hide the label
+                size_hint_y: None
+                height: self.texture_size[1] if self.text else 0
+            
+            Label :
+                text: root.success
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'                                     
+                size_hint: None, None                    
+                size : 400, 70                
+                # green color for this text
+                color: (6/255, 115/255, 0, 1)
+                size_hint_y: None
+                height: self.texture_size[1] if self.text else 0
+
+            Button:
+                text: "Agregar"
+                spacing: 20
+                padding: 20
+                bold : True
+                font_size : 25
+                # size : 400, 50
+                size_hint: 1, None 
+                height: 50
+                # size_hint: None, None
+                background_color:(7/255, 12/255, 32/255, 0.95)
+                on_release: root.add_user(dni.text, nombre.text, apellido.text)
+# navbar
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, None
+            spacing : 20
+            # padding : 10
+            height: 70
+            canvas.before:
+                Color:
+                    rgba:(7/255, 12/255, 32/255, 0.95)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:                
+                text: "Ver Lista"    
+                on_release: app.root.current = "userlist"
+                outline_width: 0.1
+                outline_color: 0, 0, 0, 1
+                color: (223/255, 223/255, 223/255, 1)
+                bold : True
+                background_color:(38/255, 9/255, 28/255, 0)
+                font_size: 25
+            
+            Button:
+                outline_width: 0.1
+                outline_color: 0, 0, 0, 1
+                text: "Agregar Persona"
+                color: (252/255, 198/255, 7/255, 1)
+                bold : True
+                background_color:(27/255, 43/255, 106/255, 0.95)
+                font_size: 25
+                on_release: app.root.current = "adduser"
+<EditUser>:
+    name: "edituser"
+    BoxLayout:
+        orientation: "vertical"
+# topbar
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba:(7/255, 12/255, 32/255, 0.95)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            orientation: "horizontal"
+            size_hint: 1, None
+            # put it at the top of the screen
+            pos_hint: {'center_x': .5, 'center_y': .1}    
+            height: 70            
+            Label:
+                text: "Editar persona"
+# content add user    
+        GridLayout:
+            cols: 1
+            # canvas.before:
+            #     Color:
+            #         rgba:(1, 0, 0, 1)
+            #     Rectangle:
+            #         pos: self.pos
+            #         size: self.size
+            padding: 20
+            spacing: 20
+            size_hint: None,1
+            # height: 650
+            width: 500
+            pos_hint: {'center_x':0.5, 'center_y': 0.5}            
+                                          
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: 1, None                    
+                height: 100       
+                pos_hint: {'center_x':0.5, 'center_y': 0.5}  
+                Label:
+                    text: "DNI"
+                    color: (7/255, 12/255, 32/255, 0.95)
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'                                     
+                    size_hint: None, None                    
+                    size : 400, 30    
+                    spacing: 10                 
+                TextInput:
+                    id: dni
+                    multiline: False
+                    size_hint: 1, None 
+                    height: 50
+
+            BoxLayout:
+                orientation: "vertical" 
+                size_hint: 1, None                    
+                height: 100       
+                pos_hint: {'center_x':0.5, 'center_y': 0.5}              
+                Label:
+                    text: "Nombre"
+                    color: (7/255, 12/255, 32/255, 0.95)
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'                                     
+                    size_hint: None, None                    
+                    size : 400, 30                     
+                TextInput:
+                    id: nombre
+                    multiline: False
+                    size_hint: 1, None 
+                    height: 50
+            BoxLayout:
+                size_hint: 1, None                    
+                height: 100       
+                pos_hint: {'center_x':0.5, 'center_y': 0.5}  
+                # padding: 10
+                # spacing: 10
+                # spacing: 100            
+                orientation: "vertical"            
+                Label:
+                    text: "Apellido"
+                    color: (7/255, 12/255, 32/255, 0.95)
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'                                     
+                    size_hint: None, None                    
+                    size : 400, 30                     
+                TextInput:
+                    id: apellido
+                    multiline: False 
+                    size_hint: 1, None 
+                    height: 50
+            Label :
+                text: root.error
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'                                     
+                size_hint: 1, None 
+                height: 70                  
+                # generate a red color
+                color: (250/255, 73/255, 73/255, 1)
+                # if the error is empty, hide the label
+                # size_hint_y: None
+                height: self.texture_size[1] if self.text else 0
+            
+            Label :
+                text: root.success
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'                                     
+                size_hint: 1, None 
+                height: 70               
+                # green color for this text
+                color: (6/255, 115/255, 0, 1)
+                # size_hint_y: None
+                height: self.texture_size[1] if self.text else 0
+
+            Button:
+                text: "Editar" #+ str(root.cid)
+                spacing: 20
+                padding: 20
+                bold : True
+                font_size : 25
+                size_hint: 1, None 
+                height: 50
+                background_color:(250/255, 195/255, 0, 1)
+                on_release: root.edit_user(dni.text, nombre.text, apellido.text)
+            Button:
+                text: "Ver Lista"
+                spacing: 20
+                padding: 20
+                bold : True
+                font_size : 25
+                size_hint: 1, None 
+                color: (7/255, 12/255, 32/255, 0.95)
+                height: 50
+                background_color:(250/255, 250/255, 250/255, 1)
+                on_release: root.manager.current = 'userlist'
+# navbar
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, None
+            spacing : 20
+            # padding : 10
+            height: 70
+            canvas.before:
+                Color:
+                    rgba:(7/255, 12/255, 32/255, 0.95)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:                
+                text: "Ver Lista"    
+                on_release: root.manager.current = "userlist"
+                outline_width: 0.1
+                outline_color: 0, 0, 0, 1
+                color: (223/255, 223/255, 223/255, 1)
+                bold : True
+                background_color:(38/255, 9/255, 28/255, 0)
+                font_size: 25
+            
+            Button:
+                outline_width: 0.1
+                outline_color: 0, 0, 0, 1
+                text: "Agregar Persona"
+                color: (252/255, 198/255, 7/255, 1)
+                bold : True
+                background_color:(27/255, 43/255, 106/255, 0.95)
+                font_size: 25
+                on_release: root.manager.current = "adduser"
